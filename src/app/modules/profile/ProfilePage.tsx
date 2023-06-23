@@ -17,7 +17,7 @@ let titleTochange : any;
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
-    title: "Expert" ,
+    title: "Admin" ,
     path: '/crafted/pages/profile/overview',
     isSeparator: false,
     isActive: false,

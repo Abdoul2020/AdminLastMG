@@ -25,11 +25,12 @@ const UsersListGrouping = () => {
       </div>
 
       <button
+
         type='button'
         className='btn btn-danger'
         onClick={async () => await deleteSelectedItems.mutateAsync()}
       >
-        Delete Selected
+        Danışanı Engele
       </button>
     </div>
   )

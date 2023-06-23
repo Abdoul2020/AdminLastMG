@@ -12,9 +12,12 @@ const Content: React.FC<WithChildren> = ({children}) => {
     DrawerComponent.hideAll()
   }, [location])
 
+
+  // className={clsx(classes.contentContainer.join(' '))}
+
   return (
 
-    <div id='kt_content_container' className={clsx(classes.contentContainer.join(' '))}>
+    <div id='kt_content_container'  className='container'  >
       {children}
     </div>
     

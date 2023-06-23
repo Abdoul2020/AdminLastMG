@@ -44,6 +44,7 @@ const AsideDefault = () => {
               alt='Logo'
               className=' logo theme-light-show'
               src={toAbsoluteUrl('/media/megaMage/megaLogo_light.png')}
+              
             />
           )}
 
@@ -58,6 +59,7 @@ const AsideDefault = () => {
         {/* end::Logo */}
       </div>
       {/* end::Brand */}
+      
       {/* begin::Aside menu */}
       <div id='kt_aside_menu' className='aside-menu flex-column-fluid ps-5 pe-3 mb-9'>
         <AsideMenu asideMenuCSSClasses={classes.asideMenu} />
@@ -65,11 +67,11 @@ const AsideDefault = () => {
       {/* end::Aside menu */}
 
       {/* begin::Footer */}
-      <div className='aside-footer flex-column-auto px-9' id='kt_aside_footer'>
+      {/* <div className='aside-footer flex-column-auto px-9' id='kt_aside_footer'>
 
         <AsideUserMenu    userData={userData} />
 
-      </div>
+      </div> */}
       {/* end::Footer */}
     </div>
   )

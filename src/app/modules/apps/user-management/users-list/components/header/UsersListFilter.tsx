@@ -1,12 +1,13 @@
-import {useEffect, useState} from 'react'
-import {MenuComponent} from '../../../../../../../_metronic/assets/ts/components'
-import {initialQueryState, KTIcon} from '../../../../../../../_metronic/helpers'
-import {useQueryRequest} from '../../core/QueryRequestProvider'
-import {useQueryResponse} from '../../core/QueryResponseProvider'
+import { useEffect, useState } from 'react'
+import { MenuComponent } from '../../../../../../../_metronic/assets/ts/components'
+import { initialQueryState, KTIcon } from '../../../../../../../_metronic/helpers'
+import { useQueryRequest } from '../../core/QueryRequestProvider'
+import { useQueryResponse } from '../../core/QueryResponseProvider'
+import DropdownWithoutSearch from '../../../../../../../_metronic/partials/widgets/feeds/DropdownWithoutSearch'
 
 const UsersListFilter = () => {
-  const {updateState} = useQueryRequest()
-  const {isLoading} = useQueryResponse()
+  const { updateState } = useQueryRequest()
+  const { isLoading } = useQueryResponse()
   const [role, setRole] = useState<string | undefined>()
   const [lastLogin, setLastLogin] = useState<string | undefined>()
 
@@ -15,15 +16,26 @@ const UsersListFilter = () => {
   }, [])
 
   const resetData = () => {
-    updateState({filter: undefined, ...initialQueryState})
+    updateState({ filter: undefined, ...initialQueryState })
   }
 
   const filterData = () => {
     updateState({
-      filter: {role, last_login: lastLogin},
+      filter: { role, last_login: lastLogin },
       ...initialQueryState,
     })
   }
+
+
+  const [dateFilter, setDateFilter] = useState(null)
+
+
+  const handleFilter = (dataFromChild: any) => {
+    setDateFilter(dataFromChild);
+  }
+
+
+  const options = ["Tümü", "1 Ay", "6 Ay", "1 Yıl"]
 
   return (
     <>
@@ -36,14 +48,14 @@ const UsersListFilter = () => {
         data-kt-menu-placement='bottom-end'
       >
         <KTIcon iconName='filter' className='fs-2' />
-        Filter
+        Filtreleme
       </button>
       {/* end::Filter Button */}
       {/* begin::SubMenu */}
       <div className='menu menu-sub menu-sub-dropdown w-300px w-md-325px' data-kt-menu='true'>
         {/* begin::Header */}
         <div className='px-7 py-5'>
-          <div className='fs-5 text-dark fw-bolder'>Filter Options</div>
+          <div className='fs-5 text-dark fw-bolder'> Filtrele </div>
         </div>
         {/* end::Header */}
 
@@ -55,46 +67,19 @@ const UsersListFilter = () => {
         <div className='px-7 py-5' data-kt-user-table-filter='form'>
           {/* begin::Input group */}
           <div className='mb-10'>
-            <label className='form-label fs-6 fw-bold'>Role:</label>
-            <select
-              className='form-select form-select-solid fw-bolder'
-              data-kt-select2='true'
-              data-placeholder='Select option'
-              data-allow-clear='true'
-              data-kt-user-table-filter='role'
-              data-hide-search='true'
-              onChange={(e) => setRole(e.target.value)}
-              value={role}
-            >
-              <option value=''></option>
-              <option value='Administrator'>Administrator</option>
-              <option value='Analyst'>Analyst</option>
-              <option value='Developer'>Developer</option>
-              <option value='Support'>Support</option>
-              <option value='Trial'>Trial</option>
-            </select>
+            <label className='form-label fs-6 fw-bold'>Referens İsmi:</label>
+            <input
+              className="form-control form-control-solid"
+              placeholder="referens ismi"
+              value=""
+            />
           </div>
           {/* end::Input group */}
 
           {/* begin::Input group */}
           <div className='mb-10'>
-            <label className='form-label fs-6 fw-bold'>Last login:</label>
-            <select
-              className='form-select form-select-solid fw-bolder'
-              data-kt-select2='true'
-              data-placeholder='Select option'
-              data-allow-clear='true'
-              data-kt-user-table-filter='two-step'
-              data-hide-search='true'
-              onChange={(e) => setLastLogin(e.target.value)}
-              value={lastLogin}
-            >
-              <option value=''></option>
-              <option value='Yesterday'>Yesterday</option>
-              <option value='20 mins ago'>20 mins ago</option>
-              <option value='5 hours ago'>5 hours ago</option>
-              <option value='2 days ago'>2 days ago</option>
-            </select>
+            <label className='form-label fs-6 fw-bold'> En Son:</label>
+            <DropdownWithoutSearch options={options} updateData={handleFilter} />
           </div>
           {/* end::Input group */}
 
@@ -108,7 +93,7 @@ const UsersListFilter = () => {
               data-kt-menu-dismiss='true'
               data-kt-user-table-filter='reset'
             >
-              Reset
+              Yenile
             </button>
             <button
               disabled={isLoading}
@@ -118,7 +103,7 @@ const UsersListFilter = () => {
               data-kt-menu-dismiss='true'
               data-kt-user-table-filter='filter'
             >
-              Apply
+              Ara
             </button>
           </div>
           {/* end::Actions */}
@@ -130,4 +115,4 @@ const UsersListFilter = () => {
   )
 }
 
-export {UsersListFilter}
+export { UsersListFilter }
